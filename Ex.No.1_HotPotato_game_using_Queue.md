@@ -10,11 +10,11 @@ To write a python program to simulate the process of passing an item among playe
 4. Eliminate the Holder: After the set number of passes, remove the person who holds the potato (dequeue the front of the queue).
 5. Repeat: Continue the process until only one person remains in the queue.
 ### Program:
+
 ```
 NAME: JANARTHANAN V K
 REG NO: 212222230051
 ```
-
 ```python
 import queue
 import random
