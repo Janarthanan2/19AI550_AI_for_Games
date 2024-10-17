@@ -1,52 +1,64 @@
-
-# Ex.No: 6  Implementation of Minimax Search
-### DATE: 12.09.2024                                                                          
-### REGISTER NUMBER : 212222240117
-### Aim: 
-Write a mini-max search algorithm to find the optimal value of MAX Player from the given graph.
+# Ex.No: 6  Implementation of Zombie survival game using A* search 
+### DATE: 13/09/24                                                                          
+### REGISTER NUMBER : 212222230051
+### AIM: 
+To write a python program to simulate the Zomibie Survival game using A* Search 
 ### Algorithm:
 1. Start the program
-2. import the math package
-3. Specify the score value of leaf nodes and find the depth of binary tree from leaf nodes.
-4. Define the minimax function
-5. If maximum depth is reached then get the score value of leaf node.
-6. Max player find the maximum value by calling the minmax function recursively.
-7. Min player find the minimum value by calling the minmax function recursively.
-8. Call the minimax function  and print the optimum value of Max player.
-9. Stop the program. 
-
+2. Import the necessary modules
+3. Initiate the pygame engine and window
+4. Collect the Zombie image and resize it within a display window 
+5. Create a Euclidean distance heuristic function to find the distance from current location to Target position
+6.  Move the Zombie towards the target by A* search 
+7.  In main, create the obstacles and move the player by Key movements up, down,left and right 
+10.  Update the display every time 
+11.  Stop the program
 ### Program:
-```py
-import math
-def minimax (curDepth, nodeIndex,
-             maxTurn, scores,
-             targetDepth):
-    # base case : targetDepth reached
-    if (curDepth == targetDepth):
-        return scores[nodeIndex]
-    if (maxTurn):
-        return max(minimax(curDepth + 1, nodeIndex * 2,
-                    False, scores, targetDepth),
-                   minimax(curDepth + 1, nodeIndex * 2 + 1,
-                    False, scores, targetDepth))
-     
+
+```python
+# Define a large negative and positive value to represent infinity
+INF = float('inf')
+
+# Alpha-Beta Pruning function
+def alpha_beta_pruning(depth, node_index, maximizing_player, values, alpha, beta):
+    # Base case: leaf node is reached
+    if depth == 3:
+        return values[node_index]
+    
+    if maximizing_player:
+        max_eval = -INF
+        # Recur for the two children of the current node
+        for i in range(2):
+            eval = alpha_beta_pruning(depth + 1, node_index * 2 + i, False, values, alpha, beta)
+            max_eval = max(max_eval, eval)
+            alpha = max(alpha, eval)
+            
+            # Prune the branch
+            if beta <= alpha:
+                break
+        return max_eval
     else:
-        return min(minimax(curDepth + 1, nodeIndex * 2,
-                     True, scores, targetDepth),
-                   minimax(curDepth + 1, nodeIndex * 2 + 1,
-                     True, scores, targetDepth))
-     
-# Driver code
-scores = [3, 5, 2, 9, 12, 5, 23, 20]
-treeDepth = math.log(len(scores), 2) # calculate depth of node  log 8 (base 2) = 3)
-print("The optimal value is : ", end = "")
-print(minimax(0, 0, True, scores, treeDepth))
+        min_eval = INF
+        # Recur for the two children of the current node
+        for i in range(2):
+            eval = alpha_beta_pruning(depth + 1, node_index * 2 + i, True, values, alpha, beta)
+            min_eval = min(min_eval, eval)
+            beta = min(beta, eval)
+            
+            # Prune the branch
+            if beta <= alpha:
+                break
+        return min_eval
+
+# Driver code : 
+if __name__ == "__main__":
+    # This is the terminal/leaf node values of the game tree
+    values = [3, 5, 6, 9, 1, 2, 0, -1]
+
+    print("Optimal value:", alpha_beta_pruning(0, 0, True, values, -INF, INF))
 ```
-
 ### Output:
-
-![Screenshot 2024-09-12 141231](https://github.com/user-attachments/assets/ff9a5b9e-7fd9-496b-b886-201b280f75ef)
-
+![Output](https://github.com/naramala-niharika/19AI550_AI_for_Games/blob/main/Screenshot%202024-10-14%20232653.png?raw=true)
 
 ### Result:
-Thus the optimum value of max player was found using minimax search.
+Thus the simple Zombie survival game was implemented using python.
