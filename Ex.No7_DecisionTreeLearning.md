@@ -1,7 +1,7 @@
 # Ex.No: 7 Implementation of Decision Tree Learning
 
-**DATE:**
-**NAME : JANARTHANAN V K**
+**DATE: 20-09-2024** <br>
+**NAME : JANARTHANAN V K**<br>
 **REGISTER NUMBER : 212222230051**
 
 ### Aim:
